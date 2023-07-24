@@ -28,7 +28,7 @@ export const main = async (
 		const signedUrls = await Promise.all(
 			files.map(async (file) => {
 				const signedUrl = await processSignedUrl(
-					'bid-bucket-s3-2',
+					'bid-bucket-s3-prod',
 					file.name,
 					file.type,
 				);

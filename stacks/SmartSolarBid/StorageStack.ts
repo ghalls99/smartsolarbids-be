@@ -4,12 +4,12 @@ export function SmartSolarStorageStack({stack}: StackContext) {
 	const env = stack.node.tryGetContext('env') || 'dev';
 
 	const bucket = new Bucket(stack, 'Bucket', {
-		name: `bid-bucket-s3-dev-2`,
+		name: `bid-bucket-s3-prod`,
 	});
 
 	bucket.attachPermissions('*');
 
-	const table = new Table(stack, `bids-dev-2`, {
+	const table = new Table(stack, `bids-prod`, {
 		fields: {
 			userId: 'string',
 			timestamp: 'string',
