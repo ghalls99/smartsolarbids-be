@@ -52,7 +52,7 @@ export const main = async (
 
 		if (electricBill?.name) {
 			const signedUrl = await processSignedUrl(
-				'bid-bucket-s3-2',
+				'bid-bucket-s3-prod',
 				electricBill.name,
 				electricBill.type,
 			);
