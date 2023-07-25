@@ -65,7 +65,7 @@ export const processSignedUrl = async (
 	fileType: string,
 ) => {
 	const params = {
-		Bucket: 'bid-bucket-s3',
+		Bucket: bucketName,
 		Key: fileName, // Use the 'name' property of the file as the object key
 		Expires: 1200, // URL expiration time in seconds (1 hour)
 		ContentType: fileType, // Use the 'type' property of the file as the Content-Type

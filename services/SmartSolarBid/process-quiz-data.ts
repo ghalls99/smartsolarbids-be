@@ -11,7 +11,6 @@ export const main = async (
 		lastName,
 		phoneNumber,
 		email,
-		homeSize,
 		electricBill,
 		averageElectricCost,
 		utilityProvider = '',
@@ -38,7 +37,6 @@ export const main = async (
 			lastName: {S: lastName},
 			phone: {S: phoneNumber || '11123123'},
 			email: {S: email},
-			homeSize: {S: homeSize},
 			electricBill: {S: JSON.stringify(electricBill)},
 			averageElectricCost: {S: averageElectricCost},
 			utilityProvider: {S: utilityProvider},
@@ -56,6 +54,8 @@ export const main = async (
 				electricBill.name,
 				electricBill.type,
 			);
+
+			console.log(signedUrl);
 
 			return {
 				statusCode: 200,
