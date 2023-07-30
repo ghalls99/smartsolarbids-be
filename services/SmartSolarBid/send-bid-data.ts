@@ -1,6 +1,7 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult} from 'aws-lambda';
 import AWS from 'aws-sdk';
-import {processSignedUrl} from '../../libs/utils';
+import {dbPutItem, processSignedUrl} from '../../libs/utils';
+import {v4} from 'uuid';
 
 export const main = async (
 	event: APIGatewayProxyEvent,
@@ -25,6 +26,19 @@ export const main = async (
 	const s3 = new AWS.S3();
 
 	try {
+		// Sending data to the desired dynamodb table for data recording
+		const timestamp = new Date().toISOString();
+		const uuid = v4();
+		await dbPutItem('dev-smartsolarbids-bids-prod', {
+			userId: {S: uuid},
+			timestamp: {S: timestamp},
+			firstName: {S: firstName},
+			lastName: {S: lastName},
+			phone: {S: phone || '11123123'},
+			email: {S: email},
+			electricBill: {S: JSON.stringify(files)},
+		});
+
 		const signedUrls = await Promise.all(
 			files.map(async (file) => {
 				const signedUrl = await processSignedUrl(

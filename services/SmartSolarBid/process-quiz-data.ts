@@ -30,7 +30,7 @@ export const main = async (
 	try {
 		const timestamp = new Date().toISOString();
 		const uuid = v4();
-		const res = await dbPutItem('bids-prod', {
+		const res = await dbPutItem('dev-smartsolarbids-bids-prod', {
 			userId: {S: uuid},
 			timestamp: {S: timestamp},
 			firstName: {S: firstName},
