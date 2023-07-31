@@ -29,7 +29,7 @@ export const main = async (
 		// Sending data to the desired dynamodb table for data recording
 		const timestamp = new Date().toISOString();
 		const uuid = v4();
-		await dbPutItem('dev-smartsolarbids-bids-prod', {
+		const res = await dbPutItem('dev-smartsolarbids-bids-prod', {
 			userId: {S: uuid},
 			timestamp: {S: timestamp},
 			firstName: {S: firstName},
@@ -39,10 +39,12 @@ export const main = async (
 			electricBill: {S: JSON.stringify(files)},
 		});
 
+		console.log(`successfully submitted data ${JSON.stringify(res)}`);
+
 		const signedUrls = await Promise.all(
 			files.map(async (file) => {
 				const signedUrl = await processSignedUrl(
-					'bid-bucket-s3-prod',
+					'bid-bucket-s3',
 					file.name,
 					file.type,
 				);

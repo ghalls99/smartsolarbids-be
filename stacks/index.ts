@@ -11,5 +11,5 @@ export default function (app: App) {
 		},
 	});
 	app.stack(SmartSolarBidApiStack);
-	app.stack(SmartSolarStorageStack);
+	//app.stack(SmartSolarStorageStack);
 }
